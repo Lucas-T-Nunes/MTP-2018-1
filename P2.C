@@ -1,4 +1,5 @@
-//Lucas Tomaz Nunes - 11721EEL007
+//Lucas Tomaz Nunes
+//11721EEL007
 
 #include <stdio.h>
 
