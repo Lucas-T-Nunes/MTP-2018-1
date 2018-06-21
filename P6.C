@@ -1,3 +1,6 @@
+//Lucas Tomaz Nunes
+//11721EEL007
+
 #include <stdio.h>
 
 int som(int num[], int a)
