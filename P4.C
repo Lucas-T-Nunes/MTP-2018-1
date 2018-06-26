@@ -1,25 +1,19 @@
-#include <stdio.h>
+//Lucas Tomaz Nunes
+//11721EEL007
 
-int main ()
-{	
-    int vetA[256], a = 0, b, c = 0;
-	char vetB[256];
-	printf("Digite um numero: ");
-	scanf("%s", &vetB);	
-	for(a=0; vetB[a] != '\0'; a++)
-	{	
-	    if(vetB[a] >= 48 && vetB[a] <= 57)
-		{
-			vetA[c] = vetB[a] - 48;
-			c++;
-		}
+#include <stdio.h>
+int main()
+{
+	int conv=0, cum=0, i=0;
+	char numero[256];
+	scanf("%s", numero);
+	getchar();
+	for (i=0; numero[i]; i++)
+	{
+		if ((numero[i]-'0')>=0 && (numero[i]-'0')<=9)
+			cum=cum*10+(numero[i]-'0');
+		else;
 	}
-	b=0;
-	printf("Valor retornado = ");
-	do
-	{	
-	    printf("%d", vetA[b]);
-		b++;
-	}while(b < c);
+	printf("%i", cum);
 	return 0;
 }
