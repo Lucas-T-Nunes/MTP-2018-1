@@ -2,98 +2,74 @@
 //11721EEL007
 
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
-
-struct dimensoes
+#include <string.h>
+typedef
+	struct Dimensoes
+	{
+		float largura;
+		float profundidade;
+		float altura;
+	}
+Dimensoes_m;
+typedef
+	struct Produto
+	{
+		char nome[64];
+		float preco;
+		Dimensoes_m dimensoes;
+	}
+Produto_m;
+void cadastro(int x, Produto_m p[2])
 {
-	float largura;
-	float profundidade;
-	float altura;
-};
-
-struct produto
-{
-	char numero[101];
-	char nome[64];
-	float preco;
-	float dimensoes;
-	struct dimensoes end;
-};
-
-struct produto produtos[100];
-
-void cadastrar_produto()
-{
-	struct produto;
-	int i = 0;
-	printf("\n\nNumero do produto a ser cadastrado: ");
-	scanf("%s", &produtos[i].numero);
 	printf("\nNome: ");
-	scanf("%s", &produtos[i].nome);
+	fgets(p[x].nome, 64, stdin); 
+	p[x].nome[strlen(p[x].nome)-1] = '\0';
+	printf("\nPreco: ");
+	scanf("%f", &p[x].preco);
 	getchar();
-	printf("\nDigite o preco: ");
-	scanf("%f", &produtos[i].preco);
+	printf("\nLargura: ");
+	scanf("%f", &p[x].dimensoes.largura);
 	getchar();
-	printf("\nDigite a largura: ");
-	scanf("%f", &produtos[i].end.largura);
+	printf("\nProfundidade: ");
+	scanf("%f", &p[x].dimensoes.profundidade);
 	getchar();
-	printf("\nDigite a produndidade: ");
-	scanf("%f", &produtos[i].end.profundidade);
+	printf("\nAltura: ");
+	scanf("%f", &p[x].dimensoes.altura);
 	getchar();
-	printf("\nDigite a altura: ");
-	scanf("%f", &produtos[i].end.altura);
-	printf("\n\nProduto %s cadastrado com sucesso!\n\n", produtos[i].numero);
 }
-
-void consultar_produto()
+int main()
 {
-	char numero_consulta[101];
-	int i = 0, flag = 0;
-	printf("\n\nDigite o numero do produto: ");
-	fflush(stdin);
-	gets(numero_consulta);
-	
-	for(i = 0 ; i < 101; i++)
-	{
-		if(strcmp(numero_consulta, produtos[i].numero) == 0)
-		{
-			flag = 1;
-			printf("\n\n%s, R$ %.2f, ",produtos[i].nome, produtos[i].preco);
-			printf("L: %.2fm x P: %.2fm x A: %.2fm\n\n", produtos[i].end.largura, produtos[i].end.profundidade, produtos[i].end.altura);
-			break;
-		}
-	}
-	if(flag == 0)
-	{
-		printf("\n\nProduto nao cadastrado.\n\n");
-		return;
-	}
-}
-
-int main ()
-{
-	int opc;
-	int i = 0;
-	struct produto produtos;
-	
+	int op_1=0, op_2=0, i=0;
+	char aux[64];
+	Produto_m p[2];
+	for (i=0; i<2; i++)
+		p[i].nome[0] = '\0';
 	do
 	{
-	printf("Menu:\n\n 1 - Cadastrar produto.\n 2 - Consultar produto.\n 3 - Sair");
-	printf("\n\nDigite a opcao desejada: ");
-	scanf("%d", &opc);
-	getchar();
-		switch(opc)
+		printf("\n1 - Cadastro\n2 - Consulta\n....");
+		scanf("%d", &op_1);
+		getchar();
+		switch (op_1)
 		{
 			case 1:
-				cadastrar_produto();
+				printf("\n....1 - Produto 1\n....2 - Produto 2\n........");
+				scanf("%d", &op_2);
+				getchar();
+				printf("\nCadastre as informacoes do produto %d: ", op_2);
+				cadastro(op_2-1, p);
+				printf("\nProduto %d cadastrado com sucesso", op_2);
 				break;
 			case 2:
-				consultar_produto();
+				printf("\nProduto a ser procurado: ");
+				scanf("%d", &op_2);
+				getchar();
+				if (strlen(p[op_2-1].nome) == 0)
+					printf("\nProduto nao cadastrado!\n");
+				else
+					printf("\n%s, R$ %.2f, L: %.2fm x P: %.2fm x A: %.2fm", p[op_2-1].nome, p[op_2-1].preco, p[op_2-1].dimensoes.largura, p[op_2-1].dimensoes.profundidade, p[op_2-1].dimensoes.altura);
 				break;
-			case 3:
-				return 0;
 		}
-	}while (opc != 4);
-	return 0;	
+	}while (op_1 == 1 || op_1 == 2);
+	return 0;
 }
