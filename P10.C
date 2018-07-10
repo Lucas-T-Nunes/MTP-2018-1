@@ -1,9 +1,10 @@
-// Lucas Tomaz Nunes
-// 11721EEL007
+//Lucas Tomaz Nunes
+//11721EEL007
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define MAXLEN 64
 
 typedef struct Dimensoes{
